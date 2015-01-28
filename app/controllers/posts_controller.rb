@@ -1,10 +1,24 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: [:show, :edit, :update, :destroy]
+  before_action :set_post, only: [:show, :like, :edit, :update, :destroy]
 
   # GET /posts
   # GET /posts.json
   def index
-    @posts = Post.all
+    @posts = Post.order('created_at DESC')
+  end
+
+  def user
+    @posts = Post.where(:user_name => params[:name])
+    render :index
+  end
+
+  def like
+    if @post.likes.nil?
+      @post.likes = 0
+    end
+    @post.likes += 1
+    @post.save!
+    render json: @post
   end
 
   # GET /posts/1
