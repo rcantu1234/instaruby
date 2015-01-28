@@ -8,7 +8,7 @@ $(document).ready(function () {
       $(that)
       .parent()
       .find('.like-count')
-      .html(response.likes);
+      .html(response.likes)
       .addClass('flash');
     });
   });
